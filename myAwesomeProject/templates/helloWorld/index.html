@@ -1,0 +1,48 @@
+{% extends 'helloWorld/base.html' %}
+
+{%block head%}
+
+<style>
+  .bold{
+    font-weight:900:
+  }
+  
+
+
+</style>
+{%endblock%}
+
+{%block body%}
+
+
+{% include 'helloWorld/nav.html' %}
+
+              <div class="container">
+                <h1>
+                  helloWorld_from_universe
+               </h1> 
+
+
+
+               <ul class="collection" >
+                  {%for i in mentors%}
+                    <li class="{% cycle 'bold' '' %} collection-item">{{ i }}</li>
+                  {% endfor %}
+               </ul>
+              </div>
+       
+          <!--
+            {{developer}} do this
+          -->
+
+          {% comment %} 
+            {{developer}} do this
+           {% endcomment %}
+
+           {{developer}} do this  
+{%endblock%}
+
+
+
+
+
