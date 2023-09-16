@@ -1,0 +1,71 @@
+{%extends 'check/base.html'%} {% block content %}
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Poller  </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a href="">QUESTION  S</a>
+            </li>
+            <li>
+                <a href="">LEADERBOARD</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <li class="collection-header">
+            <h4>{{question.content}}</h4>
+        </li>
+    </div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                <div class="collection">
+                    {%for choice in question.choice_set.all%}
+                    <label>
+                        <div class="collection-item">
+                            {% if answer %}
+                               <h5> {{choice.content}}{{choice.answercnt}}
+                                {%if answer.choice.id == choice.id%}
+                                <i class="material-icons">check</i>
+                                {% endif %}
+                               </h5>
+                                
+                            {% else %}
+                                <input class="with-gap" name="choice" type="radio" value="{{choice.id}}" />
+                               <h5> <span>{{choice.content}}</span></h5>
+                            {% endif %}
+                        </div>
+                    </label> {%endfor%}
+                </div>
+            </div>
+        </div>
+
+        {% if answer %}
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Submit
+                    </button>
+        </div>
+        {% endif %}
+        <div class="row">
+            <p class="red">
+                <ul>
+                    {% for error in form.error %}
+                    <li>
+                        {{error}}
+                    </li>{%endfor%}
+                </ul>
+            </p>
+        </div>
+
+    </form>
+
+
+</div>
+
+{%endblock%}
